@@ -13,11 +13,6 @@ for d in $(seq 1 50);do
 		user_port_first="10"${d}"0"
 		user_port_last="10"${d}"9"
 		echo user_port_last
-	else
-		ssh_port="61"${d}
-		user_port_first="1"${d}"0"
-		user_port_last="1"${d}"9"
-		echo user_port_last
 	fi
 	iptables -t nat -A PREROUTING -i vmbr0 -p tcp -m tcp --dport ${ssh_port} -j DNAT --to-destination ${user_ip}:22
 	iptables -t nat -A PREROUTING -i vmbr0 -p tcp -m tcp --dport ${user_port_first}:${user_port_last} -j DNAT --to-destination ${user_ip}
