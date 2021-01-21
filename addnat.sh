@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 iptables -t nat -F
-user_ip_head="10.0.1."
+user_ip_head="10.0.1"
 for d in $(seq 1 50);do
 	user_ip=${user_ip_head}"."${d}
 	if (("$d" < 10)); then
