@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 iptables -t nat -F
 user_ip_head="10.0."
-for d in {1..50};do
+for d in $(seq 1 5);do
 	user_ip=${user_ip_head}${c}"."${d}
 	if (("$d" < 10)); then
 		ssh_port="6"${c}"00"${d}
