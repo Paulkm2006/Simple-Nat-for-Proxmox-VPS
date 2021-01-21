@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
-echo -e "Please enter how many / 24 IP addresses are needed, max: 5."
-		stty erase '^H' && read -p "(such as 1):" user_ip_num
-		[[ -z "${user_ip_num}" ]] && echo -e "cancel..." && exit 1
 iptables -t nat -F
 user_ip_head="10.0."
-for (( c = 1; c <= ${user_ip_num}; c++ ));do
+for (( c = 1; c <= 1; c++ ));do
 	for (( d = 1; d <= 255; d++ ));do
 		user_ip=${user_ip_head}${c}"."${d}
 		if (("$d" < 10)); then
