@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 iptables -t nat -F
 user_ip_head="10.0.1"
-for ((d=1; d<=50; d++));do
+for ((d=1; d<=50; d++)); do
 	user_ip=${user_ip_head}"."${d}
 	if (("$d" < 10)); then
 		ssh_port="6100"${d}
@@ -17,5 +17,5 @@ for ((d=1; d<=50; d++));do
 	iptables -t nat -A PREROUTING -i vmbr0 -p tcp -m tcp --dport ${ssh_port} -j DNAT --to-destination ${user_ip}:22
 	iptables -t nat -A PREROUTING -i vmbr0 -p tcp -m tcp --dport ${user_port_first}:${user_port_last} -j DNAT --to-destination ${user_ip}
 	iptables -t nat -A PREROUTING -i vmbr0 -p udp -m udp --dport ${user_port_first}:${user_port_last} -j DNAT --to-destination ${user_ip}	
-done
+; done
 iptables-save > /etc/iptables/rules.v4
