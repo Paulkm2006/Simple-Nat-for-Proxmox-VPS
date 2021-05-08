@@ -6,7 +6,6 @@ if [ "${localIP}" = "" ]; then
 fi
 remote=172.31.88.222
 for ((d=1; d<=32; d++)); do
-	user_ip=${user_ip_head}"."${d}
 	if (("$d" < 10)); then
 		ssh_port="6100"${d}
 		user_port_first="100"${d}"0"
@@ -22,4 +21,6 @@ for ((d=1; d<=32; d++)); do
 	iptables -t nat -A POSTROUTING -p tcp -d $remote --dport ${user_port_first}:${user_port_last} -j SNAT --to-source $localIP
 	iptables -t nat -A POSTROUTING -p udp -d $remote --dport ${user_port_first}:${user_port_last} -j SNAT --to-source $localIP
 done
+iptables -t nat -A PREROUTING -p tcp --dport 22222 -j DNAT --to-destination $remote:22
+iptables -t nat -A POSTROUTING -p tcp -d $remote --dport 22222 -j SNAT --to-source $localI
 iptables-save > /etc/iptables/rules.v4
