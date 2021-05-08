@@ -5,6 +5,7 @@ if [ "${localIP}" = "" ]; then
         localIP=$(ip -o -4 addr list | grep -Ev '\s(docker|lo)' | awk '{print $4}' | cut -d/ -f1|head -n 1 )
 fi
 remote=172.31.88.222
+iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to ${remote}
 for ((d=1; d<=32; d++)); do
 	if (("$d" < 10)); then
 		ssh_port="6100"${d}
