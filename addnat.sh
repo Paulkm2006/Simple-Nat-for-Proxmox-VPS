@@ -12,10 +12,10 @@ for ((d=1; d<=32; d++)); do
 		user_port_last="100"${d}"9"
 		echo ${user_port_last}
 	fi
-	//ssh
+	#ssh
 	iptables -t nat -A PREROUTING -p tcp --dport ${ssh_port} -j DNAT --to-destination $remote:${ssh_port}
 	iptables -t nat -A POSTROUTING -p tcp -d $remote --dport ${ssh_port} -j SNAT --to-source $localIP
-	//ports
+	#ports
 	iptables -t nat -A PREROUTING -p tcp --dport ${user_port_first}:${user_port_last} -j DNAT --to-destination $remote
 	iptables -t nat -A PREROUTING -p udp --dport ${user_port_first}:${user_port_last} -j DNAT --to-destination $remote
 	iptables -t nat -A POSTROUTING -p tcp -d $remote --dport ${user_port_first}:${user_port_last} -j SNAT --to-source $localIP
