@@ -22,5 +22,5 @@ for ((d=1; d<=32; d++)); do
 	iptables -t nat -A POSTROUTING -p udp -d $remote --dport ${user_port_first}:${user_port_last} -j SNAT --to-source $localIP
 done
 iptables -t nat -A PREROUTING -p tcp --dport 22222 -j DNAT --to-destination $remote:22
-iptables -t nat -A POSTROUTING -p tcp -d $remote --dport 22222 -j SNAT --to-source $localI
+iptables -t nat -A POSTROUTING -p tcp -d $remote --dport 22222 -j SNAT --to-source $localIP
 iptables-save > /etc/iptables/rules.v4
