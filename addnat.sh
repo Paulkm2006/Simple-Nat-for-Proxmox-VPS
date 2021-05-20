@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 socatip=172.31.64.96
-for ((d=1; d<=32; d++)); do
+for ((d=1; d<=40; d++)); do
 	if (("$d" < 10)); then
 		ssh_port="6100"${d}
 		user_port_pre="100"${d}"0"
