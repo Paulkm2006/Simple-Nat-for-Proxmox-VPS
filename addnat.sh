@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-socatip=172.31.88.186
+socatip=172.31.64.96
 for ((d=1; d<=32; d++)); do
 	if (("$d" < 10)); then
 		ssh_port="6100"${d}
